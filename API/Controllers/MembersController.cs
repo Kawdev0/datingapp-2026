@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers;
 
-    [Route("api/[Controller]")] // loca
-    [ApiController]
-    public class MembersController(AppDbContext context) : ControllerBase
+    // [Route("api/[Controller]")] // loca
+    // [ApiController]
+    public class MembersController(AppDbContext context) : BaseApiController 
     {
 
       [HttpGet]
