@@ -1,6 +1,7 @@
-import { Component, input } from '@angular/core';
+import { Component, input, Output, EventEmitter } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RegisterCreds } from '../../../types/user';
+import { User } from '../../../types/user';
 
 @Component({
   selector: 'app-register',
@@ -8,18 +9,23 @@ import { RegisterCreds } from '../../../types/user';
   templateUrl: './register.html',
   styleUrl: './register.css',
 })
-
 export class Register {
-membersFromHome = input.required<user[]>();
-cancelRegister = output<boolean>();
-protected creds = {} as RegisterCreds;
 
+  membersFromHome = input.required<User[]>();
 
-register() {
-  console.log(this.creds);
-}
+  @Output() cancelRegister = new EventEmitter<boolean>();
 
-cancel() {
-  this.cancelRegister.emit(false);
-}
+protected creds: RegisterCreds = {
+  email: '',
+  displayName: '',
+  password: ''
+};
+
+  register() {
+    console.log(this.creds);
+  }
+
+  cancel() {
+    this.cancelRegister.emit(false);
+  }
 }

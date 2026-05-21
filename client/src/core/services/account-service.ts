@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { tap } from 'rxjs';
-import { RegisterCreds, User } from '../../types/user';
+import { LoginCreds, RegisterCreds, User } from '../../types/user';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +21,7 @@ export class AccountService {
     );
   }
 
-  login(creds: any) {
+  login(creds: LoginCreds) {
     return this.http.post<User>(
       this.baseUrl + 'account/login',
       creds
