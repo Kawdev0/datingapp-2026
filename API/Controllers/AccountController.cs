@@ -7,7 +7,6 @@ using API.Entities;
 using API.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore; 
-
 namespace API.Controllers;
 
 // [ApiController]
@@ -36,7 +35,7 @@ public class AccountController(AppDbContext context, ITokenService tokenService)
         context.Users.Add(user);
         await context.SaveChangesAsync();
 
-        return user;
+        return user.ToDto(tokenService);
     }
 
     [HttpPost("login")]
@@ -55,13 +54,8 @@ public class AccountController(AppDbContext context, ITokenService tokenService)
             if (ComputeHash[i] != user.PasswordHash[i]) return Unauthorized("invalid password");
         }
 
-        return new UserDto
-        {
-            Id = user.Id,
-            DisplayName = user.DisplayName,
-            Email = user.Email,
-            Token = tokenService.CreateToken(user)
-        };
+        return user.ToDto(tokenService);
+    
 
 
     }

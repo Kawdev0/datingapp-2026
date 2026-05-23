@@ -1,4 +1,5 @@
 using System;
+using API.Errors;
 using System.Net;
 using System.Text.Json;
 using Microsoft.AspNetCore.Http;
@@ -6,14 +7,15 @@ using Microsoft.Extensions.Logging;
 
 namespace API.Middleware;
 
-public class ExceptionMiddleWare
+public class ExceptionMiddleware
 {
     private readonly RequestDelegate next;
-    private readonly ILogger<ExceptionMiddleWare> logger;
+    private readonly ILogger<ExceptionMiddleware> logger;
     private readonly IHostEnvironment env;
 
-    public ExceptionMiddleWare(RequestDelegate next,
-        ILogger<ExceptionMiddleWare> logger,
+    public ExceptionMiddleware(
+        RequestDelegate next,
+        ILogger<ExceptionMiddleware> logger,
         IHostEnvironment env)
     {
         this.next = next;
@@ -49,3 +51,4 @@ public class ExceptionMiddleWare
         }
     }
 }
+
